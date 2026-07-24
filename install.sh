@@ -28,7 +28,7 @@ if [[ ! -f $ENV_FILE ]]; then
     sudo tee "$ENV_FILE" > /dev/null <<'EOF'
 # Options for the pi-hat-ca service (life.py). After editing, run:
 #   sudo systemctl restart pi-hat-ca
-LIFE_OPTS=--color 237,100,228 --speed 2 --brightness 0.3
+LIFE_OPTS=--color 212,0,208 --speed 1.0 --brightness 0.03
 EOF
     echo "Created $ENV_FILE with default options."
 fi
