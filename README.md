@@ -8,8 +8,8 @@ The 8x8 LED matrix is treated as a torus: patterns that run off one edge wrap ar
 
 ## Hardware
 
-- [Raspberry Pi 4 Model B (2 GB)]()
-- [Raspberry Pi Sense HAT (v1)]()
+- [Raspberry Pi 4 Model B (2 GB)](https://a.co/d/0ebAV7Bx)
+- [Raspberry Pi Sense HAT (v1)](https://a.co/d/0aupKPAa)
 
 ## Install
 
