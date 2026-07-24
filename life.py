@@ -6,7 +6,7 @@ dies out or settles into a repeating cycle, it reseeds with a random
 soup. Pressing the joystick reseeds immediately. Ctrl-C to quit.
 
 Usage:
-    life.py [--color R,G,B] [--speed GENERATIONS_PER_SEC]
+    life.py [--color R,G,B] [--speed GENERATIONS_PER_SEC] [--brightness 0..1]
 """
 
 import argparse
@@ -19,6 +19,7 @@ SIZE = 8
 HISTORY_LEN = 12           # generations remembered for cycle detection
 DEFAULT_COLOR = (237, 100, 228)
 DEFAULT_SPEED = 2.0        # generations per second
+DEFAULT_BRIGHTNESS = 0.3   # roughly matches the old low_light look
 DEAD = (0, 0, 0)
 
 
@@ -41,9 +42,19 @@ def parse_args():
         metavar="GEN_PER_SEC",
         help="generations per second (default: %(default)s)",
     )
+    parser.add_argument(
+        "--brightness",
+        type=float,
+        default=DEFAULT_BRIGHTNESS,
+        metavar="0..1",
+        help="LED brightness from 0.0 (off) to 1.0 (full), "
+             "default: %(default)s",
+    )
     args = parser.parse_args()
     if args.speed <= 0:
         parser.error("--speed must be > 0")
+    if not 0.0 <= args.brightness <= 1.0:
+        parser.error("--brightness must be between 0.0 and 1.0")
     return args
 
 
@@ -55,6 +66,12 @@ def parse_color(text):
     if not all(0 <= v <= 255 for v in rgb):
         raise argparse.ArgumentTypeError("values must be 0-255")
     return rgb
+
+
+def set_brightness(sense, brightness):
+    """Scale the LED matrix gamma table for continuous brightness control."""
+    sense.gamma_reset()
+    sense.gamma = [min(31, round(v * brightness)) for v in sense.gamma]
 
 
 def lighten(rgb, amount=0.5):
@@ -102,7 +119,7 @@ def main():
     step_delay = 1.0 / args.speed
 
     sense = SenseHat()
-    sense.low_light = True
+    set_brightness(sense, args.brightness)
     grid = random_soup()
     history = [key(grid)]
 
