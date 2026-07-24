@@ -5,9 +5,9 @@ The grid is a torus (edges wrap around). Runs forever: when the board
 dies out or settles into a repeating cycle, it reseeds with a random
 soup. Ctrl-C to quit.
 
-Joystick:
-    up / down     brighter / dimmer
-    right / left  faster / slower
+Joystick (inverted for how the Pi is physically mounted):
+    down / up     brighter / dimmer
+    left / right  faster / slower
     center press  reseed with a fresh random soup
 
 Usage:
@@ -136,17 +136,18 @@ class Controls:
         for event in self.sense.stick.get_events():
             if event.action not in ("pressed", "held"):
                 continue
-            if event.direction == "up":
+            # Directions are inverted: the Pi is mounted upside down.
+            if event.direction == "down":
                 self.brightness = min(1.0, self.brightness * BRIGHTNESS_STEP)
                 set_brightness(self.sense, self.brightness)
-            elif event.direction == "down":
+            elif event.direction == "up":
                 self.brightness = max(
                     MIN_BRIGHTNESS, self.brightness / BRIGHTNESS_STEP
                 )
                 set_brightness(self.sense, self.brightness)
-            elif event.direction == "right":
-                self.speed = min(MAX_SPEED, self.speed * SPEED_STEP)
             elif event.direction == "left":
+                self.speed = min(MAX_SPEED, self.speed * SPEED_STEP)
+            elif event.direction == "right":
                 self.speed = max(MIN_SPEED, self.speed / SPEED_STEP)
             elif event.direction == "middle":
                 self.reseed = True
