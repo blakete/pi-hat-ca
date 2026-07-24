@@ -6,6 +6,11 @@ Conway's Game of Life on a Raspberry Pi Sense HAT LED matrix with toroidal grid,
 
 The 8x8 LED matrix is treated as a torus: patterns that run off one edge wrap around to the opposite side. The simulation runs forever — when the board dies out or settles into a repeating cycle, it automatically reseeds itself with a fresh random soup. Newborn cells briefly render in a lighter shade of the configured color so you can watch the dynamics.
 
+## Hardware
+
+- [Raspberry Pi 4 Model B (2 GB)]()
+- [Raspberry Pi Sense HAT (v1)]()
+
 ## Install
 
 Clone onto a Raspberry Pi with a Sense HAT attached, then:
