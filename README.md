@@ -6,7 +6,7 @@ Conway's Game of Life on a Raspberry Pi Sense HAT LED matrix with toroidal grid,
 
 The 8x8 LED matrix is treated as a torus: patterns that run off one edge wrap around to the opposite side. The simulation runs forever — when the board dies out or settles into a repeating cycle, it automatically reseeds itself with a fresh random soup. Newborn cells briefly render in a lighter shade of the configured color so you can watch the dynamics.
 
-New to cellular automata? [John Conway explains the Game of Life](https://youtu.be/CgOcEZinQ2I) in a segment from *Stephen Hawking's The Meaning of Life* — the rules, and why such simple ones produce gliders, oscillators, and self-replicating structure.
+New to cellular automata? This [segment from *Stephen Hawking's The Meaning of Life*](https://youtu.be/CgOcEZinQ2I) introduces Conway's Game of Life — the rules, and why such simple ones produce gliders, oscillators, and self-replicating structure.
 
 ## Hardware
 
